@@ -1,3 +1,6 @@
+#include <SensirionI2CScd4x.h>
+
+
 /*
  Arduino ESP32 WiFi Web Server for the Adafruit SCD4X CO2 sensor.
  Responds to http requests with prometheus.io syntax responses.
@@ -20,6 +23,15 @@
 */
 
 #include "secrets.h"
+
+void waitForSerial(unsigned long timeout_millis) {
+  unsigned long start = millis();
+  while (!Serial) {
+    if (millis() - start > timeout_millis)
+      break;
+  }
+}
+
 
 // Task scheduler
 #include <TaskScheduler.h>
@@ -85,9 +97,8 @@ WiFiServer server(80);
 void setup() {
 
     Serial.begin(115200);
-    while (!Serial) {
-        delay(100);
-    }
+    waitForSerial(3000);
+
 
     // SCD4X setup
 

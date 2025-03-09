@@ -21,12 +21,16 @@ services:
     volumes:
       - ./grafana_data:/var/lib/grafana
     environment:
-      - GF_SECURITY_ADMIN_PASSWORD=CHANGETHISPASSWORD # CHANGEME
-      - GF_USERS_ALLOW_SIGN_UP=false
+      #- GF_AUTH_DISABLE_LOGIN_FORM=true
+      - GF_SECURITY_ADMIN_PASSWORD=admin # CHANGEME
+      #- GF_USERS_ALLOW_SIGN_UP=false
       - GF_SERVER_DOMAIN=co2.example.net
+      - GF_SERVER_HTTP_ADDR=0.0.0.0
       - GF_SMTP_ENABLED=false
       - GF_AUTH_ANONYMOUS_ENABLED=true
-      - GF_AUTH_ANONYMOUS_ORG_NAME=Example
+      #- GF_AUTH_ANONYMOUS_ORG_NAME=Example
+    ports:
+    - "3000:3000"  # Expose port 3000 directly
     networks:
       - traefik
     labels:

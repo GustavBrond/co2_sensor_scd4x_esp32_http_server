@@ -1,2 +1,7 @@
 secrets.h
 
+dashboard/grafana/grafana_data/*
+dashboard/grafana/prometheus_data/*
+!dashboard/grafana/grafana_data/.gitkeep
+!dashboard/grafana/prometheus_data/.gitkeep
+
